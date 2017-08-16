@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Course>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>List of Courses</h2>
+
+@if (Model.Any())
+{
+
+    <table class="table">
+        @foreach (var course in Model)
+        {
+            <tr>
+                <td>@course.Title</td>
+                <td>@course.id</td>
+                <td>
+                    <table class="table-condensed">
+                        @foreach (var module in course.Modules)
+                        {
+                            <tr>
+                                <td>@module.Title</td>
+                                <td>
+                                    <table class="table-condensed">
+                                        @foreach (var clip in module.Clips)
+                                        {
+                                            <tr>
+                                                <td>@clip.Name</td>
+                                                <td>@(clip.Length)m</td>
+                                            </tr>
+                                        }
+                                    </table>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </td>
+            </tr>
+        }
+    </table>
+
+
+}
+else
+{
+    <div>No courses to display. </div>
+
+    <form method="post" action="@Url.Action("Insert")">
+        @Html.AntiForgeryToken()
+        <input class="btn btn-primary" type="submit" name="Insert" value="Insert Sample Courses" />
+    </form>
+}
