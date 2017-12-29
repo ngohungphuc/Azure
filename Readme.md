@@ -1,0 +1,1 @@
+<img src="img/microsoft-azure.png" width="100%">
